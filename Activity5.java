@@ -105,15 +105,15 @@ System.out.println("\t\t\t\t\t\t"+pd3+"\t\t"+pd4);
 System.out.println("\t\t\t\t\t\t\t\t"+pd4);
 System.out.println("------------------------------------------------------------------------");
 System.out.println("Payment Plans: ");
-System.out.println("1.) Cash \t3.)3 Payments\n2.)2 Payments\t4.)4 Payments");
+System.out.println("1.) Full \t3.)3 Payments\n2.)2 Payments\t4.)4 Payments");
 System.out.println("Enter Payment Plan: ");
 choice = in.nextInt();
 
 /*I'll add peyment mode here since you have o enter payment in all of them and then print the change
  * things added are just the things the user needs to input */
-String cardType, bank, chequeName;
+String cardType, bank, chequeName, cardNum;
 int approvalNum, chequeNum;
-double cardNum;
+
 System.out.println("Payment Modes: ");
 System.out.println("1.) Card\n2.) Cash\n3.) Cheque");
 System.out.println("Enter Payment Mode: ");
@@ -124,10 +124,33 @@ switch(pModeChoice){
         System.out.println("Enter your card type: [visa/amex/mastercard]");
         in.nextLine();
         cardType = in.nextLine();
-        System.out.println("Enter your card number: ");
-        cardNum = in.nextDouble();
+        /*this should have a loop wherein if use inputs a value with no more or less than 13 digits --- length?? */
+        do{
+            System.out.println("Enter your card number: ");
+            cardNum = in.nextLine();
+            if (cardNum.length() != 13){
+                System.out.println("\nInput 13 digits please.");
+            }
+        } while(cardNum.length() != 13);
+        /*******************************************************************/
         System.out.println("Enter your approval number: ");
         approvalNum = in.nextInt();
+        if(choice == 1){
+            System.out.println("You have fully paid for your tuition fee.");
+            choice = 5;
+        }else if(choice == 2){
+            remainingTF = p2 - pd2;
+	        System.out.println("Remaining Tuition Fee: "+ remainingTF);
+            choice = 5;
+        }else if(choice == 3){
+            remainingTF = p3 - pd3;
+	        System.out.println("Remaining Tuition Fee: "+ remainingTF);
+            choice = 5;
+        }else if(choice == 4){
+            remainingTF = p4 - pd4;
+	        System.out.println("Remaining Tuition Fee: "+ remainingTF);
+            choice = 5;
+        }
         break;
     case 2:
         System.out.println("You have chosen to pay in cash.");
@@ -143,8 +166,6 @@ switch(pModeChoice){
         in.nextLine();
         chequeName = in.nextLine();
         break;
-
-        
 }
 switch(choice){
     case 1:
@@ -205,6 +226,8 @@ switch(choice){
         }
         System.out.println("-----------------------------------------------------");
         break;
+    case 5:
+        System.out.println("You are now officially enrolled. See you in class!.");
 }
 }
 else{
